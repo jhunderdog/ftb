@@ -9,8 +9,15 @@ import 'package:ftb/messages.dart';
 import 'package:ftb/student.dart';
 import 'package:get/get.dart';
 
-void main() {
+Future<void> main() async {
+  await initServices();
   runApp(MyApp());
+}
+
+Future<void> initServices() async {
+  print(' This is the start of services ');
+  await Get.putAsync<Service>(() async => await Service());
+  print(' The Services are about to start');
 }
 
 class MyApp extends StatefulWidget {
@@ -19,19 +26,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // Controller controller =
-  //     Get.put(Controller(), tag: "coding cafe 1", permanent: true);
   @override
   Widget build(BuildContext context) {
-    // Get.lazyPut(() => Controller(), tag: "coding cafe 1", fenix: true);
-    // Get.create(() => Controller());
-    Get.putAsync<Controller>(() async => await Controller());
     return GetMaterialApp(
-        title: " Dependency Injection ",
+        title: " GetX Service ",
         home: Scaffold(
           appBar: AppBar(
             title: AppBar(
-              title: Text(" Dependency Injection "),
+              title: const Text(" GetX Service "),
             ),
           ),
           body: Center(
@@ -41,12 +43,9 @@ class _MyAppState extends State<MyApp> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    // Get.find<Controller>(tag: "coding cafe 1");
-                    // Get.find<Controller>(tag: "coding cafe 1");
-                    // Get.find<Controller>();
-                    Get.find<Controller>().increment();
+                    Get.find<Service>().increment();
                   },
-                  child: Text(" Click Here"),
+                  child: const Text(" Increment Button "),
                 )
               ],
             ),
