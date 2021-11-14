@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ftb/dashBoardPage.dart';
-import 'package:ftb/homePage.dart';
+import 'package:ftb/home_page.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
                     onPressed: () {
                       Get.toNamed("/HomePage");
                     },
-                    child: Text(" Go to Home"))
+                    child: const Text(" Go to Home"))
               ],
             ))));
   }
