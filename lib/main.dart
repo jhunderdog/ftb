@@ -11,54 +11,63 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   Controller controller = Get.put(Controller());
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: " Reactive State Manager By Using GetX Controller ",
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(" Reactive State Manager By Using GetX Controller "),
-        ),
-        body: Center(
-          child: Column(
+        title: " Unique Id ",
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text(" Unique Id "),
+          ),
+          body: Center(
+              child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              GetX<Controller>(
-                // init: Controller(),
+              GetBuilder<Controller>(
+                id: 'Counter',
                 builder: (controller) {
-                  return Text(" The value is ${controller.count}",
-                      style: TextStyle(
-                          fontSize: 20.0, fontWeight: FontWeight.bold));
+                  return Text(
+                    "The value is ${controller.count}",
+                    style: const TextStyle(
+                        fontSize: 20.0, fontWeight: FontWeight.bold),
+                  );
                 },
               ),
-              SizedBox(
+              GetBuilder<Controller>(
+                builder: (controller) {
+                  return Text(
+                    "The value is ${controller.count}",
+                    style: const TextStyle(
+                        fontSize: 20.0, fontWeight: FontWeight.bold),
+                  );
+                },
+              ),
+              const SizedBox(
                 height: 10.0,
               ),
               ElevatedButton(
                 onPressed: () {
-                  // Get.find<Controller>().increment();
                   controller.increment();
                 },
-                child: Text(" Increment Button "),
-              ),
-              SizedBox(
-                height: 10.0,
+                child: const Text("Increment"),
               ),
               ElevatedButton(
                 onPressed: () {
-                  // Get.find<Controller>().decrement();
                   controller.decrement();
                 },
-                child: Text(" Decrement Button "),
-              ),
+                child: const Text("Decrement"),
+              )
             ],
-          ),
-        ),
-      ),
-    );
+          )),
+        ));
   }
 }
