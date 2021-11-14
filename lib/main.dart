@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:ftb/dashBoardPage.dart';
 import 'package:ftb/home_page.dart';
 import 'package:get/get.dart';
@@ -8,33 +9,46 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  var count = 0.obs;
+
+  void increment() {
+    count++;
+  }
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        title: " Route Navigation For named Routes ",
-        initialRoute: "/",
-        defaultTransition: Transition.rightToLeftWithFade,
-        getPages: [
-          GetPage(name: "/", page: () => MyApp()),
-          GetPage(name: '/HomePage', page: () => HomePage()),
-          GetPage(name: '/DashboardPage', page: () => DashBoardPage()),
-        ],
+        title: " State Management Reactive ",
         home: Scaffold(
             appBar: AppBar(
-              title: Text(" Route Navigation For named Routes "),
+              title: Text(" State Management Reactive "),
             ),
             body: Center(
-                child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ElevatedButton(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Obx(
+                    () => Text(
+                      " Count value is $count",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  ElevatedButton(
                     onPressed: () {
-                      Get.toNamed("/HomePage");
+                      increment();
                     },
-                    child: const Text(" Go to Home"))
-              ],
-            ))));
+                    child: Text(" Increment Button "),
+                  )
+                ],
+              ),
+            )));
   }
 }
