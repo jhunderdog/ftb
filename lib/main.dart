@@ -19,19 +19,19 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Controller controller = Get.put(Controller());
-
+  // Controller controller =
+  //     Get.put(Controller(), tag: "coding cafe 1", permanent: true);
   @override
   Widget build(BuildContext context) {
+    // Get.lazyPut(() => Controller(), tag: "coding cafe 1", fenix: true);
+    // Get.create(() => Controller());
+    Get.putAsync<Controller>(() async => await Controller());
     return GetMaterialApp(
-      translations: Messages(),
-      locale: Locale('en', 'America'),
-      fallbackLocale: Locale('en', 'America'),
-      title: "Internationalization",
-      home: Scaffold(
+        title: " Dependency Injection ",
+        home: Scaffold(
           appBar: AppBar(
-            title: Text(
-              "Internationalization",
+            title: AppBar(
+              title: Text(" Dependency Injection "),
             ),
           ),
           body: Center(
@@ -39,44 +39,18 @@ class _MyAppState extends State<MyApp> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  "hello".tr,
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54,
-                  ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
                 ElevatedButton(
                   onPressed: () {
-                    controller.changeLanguage('korean', 'Korea');
+                    // Get.find<Controller>(tag: "coding cafe 1");
+                    // Get.find<Controller>(tag: "coding cafe 1");
+                    // Get.find<Controller>();
+                    Get.find<Controller>().increment();
                   },
-                  child: Text("Korean"),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    controller.changeLanguage('chinese', 'China');
-                  },
-                  child: Text("Chinese"),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    controller.changeLanguage('en', 'America');
-                  },
-                  child: Text("English"),
-                ),
+                  child: Text(" Click Here"),
+                )
               ],
             ),
-          )),
-    );
+          ),
+        ));
   }
 }
