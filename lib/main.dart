@@ -1,55 +1,57 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ftb/controller.dart';
-import 'package:ftb/dashBoardPage.dart';
-import 'package:ftb/home_page.dart';
-import 'package:ftb/messages.dart';
-import 'package:ftb/student.dart';
 import 'package:get/get.dart';
 
-Future<void> main() async {
-  await initServices();
+void main() {
   runApp(MyApp());
 }
 
-Future<void> initServices() async {
-  print(' This is the start of services ');
-  await Get.putAsync<Service>(() async => await Service());
-  print(' The Services are about to start');
-}
+class MyApp extends GetView<Controller> {
+  const MyApp({Key? key}) : super(key: key);
 
-class MyApp extends StatefulWidget {
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+    Get.put(Controller());
     return GetMaterialApp(
-        title: " GetX Service ",
-        home: Scaffold(
-          appBar: AppBar(
-            title: AppBar(
-              title: const Text(" GetX Service "),
-            ),
-          ),
-          body: Center(
-            child: Column(
+      title: " GetView ",
+      home: Scaffold(
+        appBar: AppBar(title: const Text(" Get View")),
+        body: Center(
+          child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Obx(
+                  () => Text(
+                    " The Value is ${controller.count}",
+                    style: const TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
                 ElevatedButton(
-                  onPressed: () {
-                    Get.find<Service>().increment();
-                  },
-                  child: const Text(" Increment Button "),
-                )
-              ],
-            ),
-          ),
-        ));
+                    onPressed: () {
+                      print(controller.hashCode);
+                      controller.increment();
+                    },
+                    child: Text("Increment Button")),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      print(controller.hashCode);
+                      controller.decrement();
+                    },
+                    child: Text("Decrement Button"))
+              ]),
+        ),
+      ),
+    );
   }
 }
