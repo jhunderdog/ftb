@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ftb/dashBoardPage.dart';
 import 'package:ftb/homePage.dart';
 import 'package:get/get.dart';
 
@@ -11,10 +12,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        title: " Route Navigation For Un-named Routes ",
+        title: " Route Navigation For named Routes ",
+        initialRoute: "/",
+        defaultTransition: Transition.rightToLeftWithFade,
+        getPages: [
+          GetPage(name: "/", page: () => MyApp()),
+          GetPage(name: '/HomePage', page: () => HomePage()),
+          GetPage(name: '/DashboardPage', page: () => DashBoardPage()),
+        ],
         home: Scaffold(
             appBar: AppBar(
-              title: Text(" Route Navigation For Un-named Routes "),
+              title: Text(" Route Navigation For named Routes "),
             ),
             body: Center(
                 child: Column(
@@ -23,9 +31,7 @@ class MyApp extends StatelessWidget {
               children: [
                 ElevatedButton(
                     onPressed: () {
-                      Get.to(
-                        HomePage(),
-                      );
+                      Get.toNamed("/HomePage");
                     },
                     child: Text(" Go to Home"))
               ],

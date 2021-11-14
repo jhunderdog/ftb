@@ -27,7 +27,7 @@ class DashBoardPage extends StatelessWidget {
               SizedBox(height: 10.0),
               ElevatedButton(
                   onPressed: () {
-                    Get.back();
+                    Get.toNamed("/HomePage");
                   },
                   child: Text(
                     " Go back to Home Page ",

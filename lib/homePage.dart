@@ -26,9 +26,7 @@ class HomePage extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              Get.to(
-                DashBoardPage(),
-              );
+              Get.toNamed("/DashboardPage");
             },
             child: Text(
               " Go to Dashboard Page ",
@@ -37,16 +35,6 @@ class HomePage extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-          ),
-          SizedBox(
-            height: 10.0,
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Get.back();
-            },
-            child: Text(" Go back to main",
-                style: TextStyle(fontSize: 15.0, color: Colors.white)),
           ),
         ],
       ),
